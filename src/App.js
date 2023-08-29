@@ -1,6 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import Customer from './conponents/Customer';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const customers = [{
 
@@ -40,33 +46,36 @@ const customers = [{
 
 function App() {
   return (
-    <div className="back">
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableHead>
+          <TableRow>
+            <TableCell>이름</TableCell>
+            <TableCell align="right">걸그룹</TableCell>
+            <TableCell align="right">생년월일</TableCell>
+            <TableCell align="right">포지션</TableCell>
+            <TableCell align="right">출생지</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {customers.map((row) => (
+            <TableRow
+              key={row.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="right">{row.걸그룹}</TableCell>
+              <TableCell align="right">{row.생년월일}</TableCell>
+              <TableCell align="right">{row.포지션}</TableCell>
+              <TableCell align="right">{row.출생지}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
 
-      {
-        customers.map((v, i) => {
-          return (
-
-            <Customer
-
-              key={i}
-              id={v.id}
-              걸그룹={v.걸그룹}
-              name={v.name}
-              생년월일={v.생년월일}
-              출생지={v.출생지}
-              포지션={v.포지션}
-              소개={v.소개}
-
-
-            ></Customer>
-          )
-
-
-
-        })
-      }
-
-    </div>
   );
 }
 
